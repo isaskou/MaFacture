@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[Utilisateur]
+(
+	[UserId] INT NOT NULL IDENTITY,
+	[Prenom] NVARCHAR(50) NOT NULL,
+	[Nom] NVARCHAR(50) NOT NULL,
+	[Email] NVARCHAR(200) NOT NULL,
+	[Password] NVARCHAR(50) NOT NULL,
+	[Role] NVARCHAR(50) NOT NULL,
+
+	CONSTRAINT PK_UserId
+		PRIMARY KEY (UserId),
+	CONSTRAINT FK_Utilisateur_Role 
+		FOREIGN KEY ([Role])
+		REFERENCES [Role](nom)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	CONSTRAINT CK_EmailUser
+		CHECK (Email LIKE '%@%.%'),
+)
